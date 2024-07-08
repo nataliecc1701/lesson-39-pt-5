@@ -6,6 +6,11 @@ it("renders", function () {
   render(<Carousel photos={TEST_IMAGES} title="images for testing" />)
 })
 
+it("matches the snapshot", function () {
+  const {asFragment} = render(<Carousel photos={TEST_IMAGES} title="images for testing" />)
+  expect(asFragment()).toMatchSnapshot()
+})
+
 it("works when you click on the right arrow", function() {
   const { container } = render(
     <Carousel
