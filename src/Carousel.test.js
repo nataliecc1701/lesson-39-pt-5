@@ -70,4 +70,29 @@ it("works when you click on the left arrow", function() {
   expect(
     container.querySelector('img[alt="testing image 2"]')
   ).not.toBeInTheDocument();
-})
+});
+
+it("hides the appropriate arrows on the first and last images", function () {
+  const { container } = render(
+    <Carousel
+      photos={TEST_IMAGES}
+      title="images for testing"
+    />
+  );
+  
+  // expect the left arrow not to show
+  expect(container.querySelector(".bi-arrow-left-circle")).not.toBeInTheDocument();
+  
+  // move forward in the carousel
+  const rightArrow = container.querySelector(".bi-arrow-right-circle");
+  fireEvent.click(rightArrow);
+  
+  // expect the left arrow to show
+  expect(container.querySelector(".bi-arrow-left-circle")).toBeInTheDocument();
+  
+  // move to the last image in the document
+  fireEvent.click(rightArrow);
+  
+  // expect the right arrow not to show
+  expect(rightArrow).not.toBeInTheDocument()
+});
